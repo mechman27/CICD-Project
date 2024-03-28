@@ -33,12 +33,12 @@ resource "google_compute_instance" "web-server" {
         'deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
         $(. /etc/os-release && echo '$VERSION_CODENAME') stable' | \
         sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    sudo apt-get update;
-    
-    sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin;
-    
-    sudo docker build https://github.com/dockersamples/node-bulletin-board.git#master:bulletin-board-app;
-  
+    sudo apt-get update
+    sleep 5
+    sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    sleep 20
+    sudo docker build https://github.com/dockersamples/node-bulletin-board.git#master:bulletin-board-app
+    sleep 30
     dockerimage =$(docker images -q)
     sudo docker run -p 80:8080 $dockerimage
   SCRIPT
