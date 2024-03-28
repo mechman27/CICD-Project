@@ -1,5 +1,5 @@
 resource "google_compute_instance" "web-server" {
-  name         = "CIT262-VM-CICD"
+  name         = "cit262-vm-cicd"
   project      = "secure-granite-397514"
   machine_type = "e2-medium"
   zone         = "us-west1-b"
