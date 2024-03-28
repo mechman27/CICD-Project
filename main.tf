@@ -1,5 +1,6 @@
-resource "google_compute_address" "static" {
-  name = "ipv4-cicd-test"
+resource "google_compute_address" "ephemeral_address" {
+  name   = "ipv4-cicd-test"
+  region = "us-west1"
 }
 resource "google_compute_instance" "web-server" {
   name         = "cit262-vm-cicd"
@@ -15,6 +16,9 @@ resource "google_compute_instance" "web-server" {
   }
   network_interface {
     network = "default"
+    access_config {
+      nat_ip = google_compute_address.ephemeral_address.address
+    }
   }
   metadata_startup_script = <<-SCRIPT
     #!/bin/bash
