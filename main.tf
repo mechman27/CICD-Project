@@ -1,7 +1,3 @@
-provider "google" {
-  project = "secure-granite-397514"
-  region  = "us-west1"
-}
 resource "google_compute_instance" "web-server" {
   name         = "CIT262-VM-CICD"
   machine_type = "e2-medium"
