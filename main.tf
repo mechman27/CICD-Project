@@ -3,7 +3,7 @@ resource "google_compute_instance" "web-server" {
   project      = "secure-granite-397514"
   machine_type = "e2-medium"
   zone         = "us-west1-b"
-
+  tags         = http-server
   boot_disk {
     initialize_params {
       image = "debian-cloud/debian-11"
@@ -11,6 +11,7 @@ resource "google_compute_instance" "web-server" {
   }
   network_interface {
     network = "default"
+    access_config {}
   }
   metadata_startup_script = <<-SCRIPT
     #!/bin/bash
