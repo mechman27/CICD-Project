@@ -1,3 +1,8 @@
+provider "google" {
+  project     = "secure-granite-397514"
+  region      = "us-west1"
+  credentials = "/Users/dbedford/Downloads/secure-granite-397514-7221b0ef8b7f.json"
+}
 resource "google_compute_instance" "web-server" {
   name         = "CIT262-VM-CICD"
   machine_type = "e2-medium"
