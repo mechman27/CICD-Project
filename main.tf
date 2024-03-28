@@ -1,3 +1,6 @@
+resource "google_compute_address" "static" {
+  name = "ipv4-cicd-test"
+}
 resource "google_compute_instance" "web-server" {
   name         = "cit262-vm-cicd"
   project      = "secure-granite-397514"
@@ -12,8 +15,6 @@ resource "google_compute_instance" "web-server" {
   }
   network_interface {
     network = "default"
-
-    access_config {}
   }
   metadata_startup_script = <<-SCRIPT
     #!/bin/bash
