@@ -1,4 +1,4 @@
-resource "google_compute_address" "ephemeral_address" {
+resource "google_compute_address" "static_address" {
   name   = "ipv4-cicd-test"
   region = "us-west1"
 }
@@ -17,7 +17,7 @@ resource "google_compute_instance" "web-server" {
   network_interface {
     network = "default"
     access_config {
-      nat_ip = google_compute_address.ephemeral_address.address
+      nat_ip = google_compute_address.static_address.address
     }
   }
   metadata_startup_script = <<-SCRIPT
@@ -38,7 +38,7 @@ resource "google_compute_instance" "web-server" {
     sleep 10
     sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
     sleep 30
-    sudo docker build https://github.com/dockersamples/node-bulletin-board.git#master:bulletin-board-app;
+    sudo docker build https://github.com/dockersamples/node-bulletin-board.git#master:bulletin-board-app
     sleep 30
     dockerimage =$(docker images -q)
     sudo docker run -p 80:8080 $dockerimage
