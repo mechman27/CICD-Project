@@ -1,7 +1,9 @@
+# Create Static IP for the Instance
 resource "google_compute_address" "static_address" {
   name   = "ipv4-cicd-test"
   region = "us-west1"
 }
+#Create GCP Instance 
 resource "google_compute_instance" "web-server" {
   name         = "cit262-vm-cicd"
   project      = "secure-granite-397514"
@@ -20,6 +22,7 @@ resource "google_compute_instance" "web-server" {
       nat_ip = google_compute_address.static_address.address
     }
   }
+  #Script to Install Docker
   metadata_startup_script = <<-SCRIPT
 #!/bin/bash
 sudo apt-get update
